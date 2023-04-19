@@ -23,10 +23,6 @@ const port = 3000,
             response.end("<h1>Willkommen!</h1>");
         }
 
-        /*let responseMessage = "<h1> Hello World</h1>";
-        response.write(responseMessage);
-        response.end();
-        console.log('Sent a response : ' + responseMessage);*/
     });
 
 app.listen(port);
