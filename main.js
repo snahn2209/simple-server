@@ -12,28 +12,28 @@ const port = 3000,
     http = require("http"),
     httpStatus = require("http-status-codes"),
     fs = require("fs");
-const routeMap = {
+/*const routeMap = {
     "/": "views/index.html"
+};*/
+const getViewUrl = (url) => {
+    return 'views/'+url+'.html';
 };
+
 http
     .createServer((req, res) => {
-        res.writeHead(httpStatus.OK, {
-            "Content-Type": "text/html"
-        });
-        if (routeMap[req.url]){
-            fs.readFile(routeMap[req.url], (error, data) => {
+        let viewUrl = getViewUrl(req.url);
+        fs.readFile(viewUrl, (error, data) => {
+            if(error) {
+                res.writeHead(httpStatus.NOT_FOUND);
+                res.write("<h1>FILE WAS NOT FOUND </h1>")
+            } else {
+                res.writeHead(httpStatus.OK, {
+                    "Content-Type": "text/html"
+                });
                 res.write(data);
-                res.end;
-            });
-        } else {
-            res.end("<h1>sorry, not found.</h1>")
-        }
-
-        /*if (routeResponseMap[request.url]) {
-            response.end(routeResponseMap[request.url]);
-        } else {
-            response.end("<h1>Willkommen!</h1>");
-        }*/
+            }
+            res.end();
+        });
 
     })    
     .listen(port);
