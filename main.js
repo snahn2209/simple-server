@@ -1,5 +1,13 @@
 const { listenerCount } = require("process");
 
+const routeResponseMap = {
+    "/info": "<h1>Informationen</h1>",
+    "/contact": "<h1>Kontakt</h1>",
+    "/about": "<h1>Über uns</h1>",
+    "/hello": "<h1>HI!</h1>",
+    "/error": "<h1>Fehler</h1>",
+}
+
 const port = 3000, 
     http = require("http"),
     httpStatus = require("http-status-codes"),
@@ -9,10 +17,16 @@ const port = 3000,
             "Content-Type": "text/html"
         });
 
-        let responseMessage = "<h1> Hello World</h1>";
+        if (routeResponseMap[request.url]) {
+            response.end(routeResponseMap[request.url]);
+        } else {
+            response.end("<h1>Willkommen!</h1>");
+        }
+
+        /*let responseMessage = "<h1> Hello World</h1>";
         response.write(responseMessage);
         response.end();
-        console.log('Sent a response : ' + responseMessage);
+        console.log('Sent a response : ' + responseMessage);*/
     });
 
 app.listen(port);
