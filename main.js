@@ -16,17 +16,17 @@ const routeMap = {
     "/": "views/index.html"
 };
 http
-    .createServer((request, response) => {
-        response.writeHead(httpStatus.OK, {
+    .createServer((req, res) => {
+        res.writeHead(httpStatus.OK, {
             "Content-Type": "text/html"
         });
-        if (routeMap[request.url]){
-            fs.readFile(routeMap[request.url], (error, data) => {
-                response.write(data);
-                response.end;
+        if (routeMap[req.url]){
+            fs.readFile(routeMap[req.url], (error, data) => {
+                res.write(data);
+                res.end;
             });
         } else {
-            response.end("<h1>sorry, not found.</h1>")
+            res.end("<h1>sorry, not found.</h1>")
         }
 
         /*if (routeResponseMap[request.url]) {
