@@ -1,5 +1,6 @@
-const { listenerCount } = require("process");
+"use strict"
 
+const { listenerCount } = require("process");
 
 
 const port = 3000, 

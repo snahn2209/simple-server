@@ -1,3 +1,6 @@
+"use strict"
+
+
 const httpStatus = require("http-status-codes"),
     htmlContentType = {
         "Content-Type": "text/html"
